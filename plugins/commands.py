@@ -319,7 +319,7 @@ async def start(client, message):
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("Owner 🐜", url="t.me/rahulp_r")
+                    InlineKeyboardButton("Owner 😉", url="t.me/rahulp_r")
                 ] 
             ] 
         )
