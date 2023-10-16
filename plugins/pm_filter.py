@@ -120,6 +120,7 @@ async def next_page(bot, query):
         ]
     elif settings['button'] and not ENABLE_SHORTLINK:
         text =f" <a href='https://telegram.me/{temp.U_NAME}?start=files_{file.file_id}'>Jᴏᴇʟ Kᴜʀɪᴀɴ Bɪᴊᴜ</a>"
+        for file in files
     else:
         btn = [
             [
