@@ -119,8 +119,14 @@ async def next_page(bot, query):
             for file in files
         ]
     elif settings['button'] and not ENABLE_SHORTLINK:
-        text =f" <a href='https://telegram.me/{temp.U_NAME}?start=files_{file.file_id}'>Jᴏᴇʟ Kᴜʀɪᴀɴ Bɪᴊᴜ</a>"
-        for file in files
+        btn = [
+            [
+                InlineKeyboardButton(
+                    text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
+                ),
+            ]
+            for file in files
+        ] 
     else:
         btn = [
             [
@@ -777,7 +783,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             protect_content=True if ident == 'checksubp' else False,
             reply_markup=InlineKeyboardMarkup(
                 [[
-                          InlineKeyboardButton("Owner 🐜", url="t.me/rahulp_r")
+                          InlineKeyboardButton("Owner 😉", url="t.me/rahulp_r")
                 ]] 
             )
         )
