@@ -120,7 +120,7 @@ async def next_page(bot, query):
         ]
     elif settings['button'] and not ENABLE_SHORTLINK:
         btn = [
-            text == f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
+            text==f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
         for file in files
         ] 
     else:
@@ -140,20 +140,20 @@ async def next_page(bot, query):
         if settings['auto_delete']:
             btn.insert(0, 
                 [
-                    InlineKeyboardButton(f'ɪɴꜰᴏ', 'reqinfo')
+                    InlineKeyboardButton(f'Info ℹ️', 'reqinfo')
                 ]
             )
         else:
             btn.insert(0, 
                 [
-                    InlineKeyboardButton(f'ᴍᴏᴠɪᴇ', 'minfo')
+                    InlineKeyboardButton(f'Info ℹ️', 'reqinfo')
                 ]
             )            
     except KeyError:
         await save_group_settings(query.message.chat.id, 'auto_delete', True)
         btn.insert(0, 
             [
-                InlineKeyboardButton(f'ɪɴꜰᴏ', 'reqinfo')
+                InlineKeyboardButton(f'Info ℹ️', 'reqinfo')
             ]
         )
     try:
