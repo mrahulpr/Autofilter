@@ -120,9 +120,13 @@ async def next_page(bot, query):
         ]
     elif settings['button'] and not ENABLE_SHORTLINK:
         btn = [
-            text==f"[{get_size(file.file_size)}] {file.file_name}", callback_data==f'files#{file.file_id}'
-        for file in files
-        ] 
+            [
+                InlineKeyboardButton(
+                    text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
+                ),
+            ]
+            for file in files
+    ]
     else:
         btn = [
             [
@@ -224,9 +228,6 @@ async def next_page(bot, query):
     btn.insert(0, [
         InlineKeyboardButton("🔃 PM All", callback_data=f"send_fall#files#{offset}#{req}"),
         InlineKeyboardButton("Language 🔣", callback_data=f"select_lang#{req}")
-    ])
-    btn.insert(0, [
-        InlineKeyboardButton("⚡ Cʜᴇᴄᴋ Bᴏᴛ PM ⚡", url=f"https://t.me/{temp.U_NAME}")
     ])
     try:
         await query.edit_message_reply_markup(
