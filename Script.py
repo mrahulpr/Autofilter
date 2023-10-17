@@ -18,10 +18,10 @@ class script(object):
 
     MANUELFILTER_TXT = """Help: <b>Filters</b>
 
-- Filter is the feature were users can set automated replies for a particular keyword and Samantha will respond whenever a keyword is found in the message.... 
+- Filter is the feature were users can set automated replies for a particular keyword and, I will respond whenever a keyword is found in the message.... 
 
 <b>NOTE:</b>
-1. Samantha should have admin privillage.
+1. Pliky Bot should have admin privillage.
 2. only admins can add filters in a chat.
 3. alert buttons have a limit of 64 characters.
 
@@ -32,11 +32,11 @@ class script(object):
 • /delall - <code>delete the whole filters in a chat (chat owner only)</code>"""
     BUTTON_TXT = """Help: <b>Buttons</b>
 
-- Samantha Supports both url and alert inline buttons.
+- Pliky Bot Supports both url and alert inline buttons.
 
 <b>NOTE:</b>
 1. Telegram will not allows you to send buttons without any content, so content is mandatory.
-2. Samantha supports buttons with any telegram media type.
+2. Pliky Bot supports buttons with any telegram media type.
 3. Buttons should be properly parsed as markdown format
 
 <b>URL buttons:</b>
@@ -67,7 +67,7 @@ class script(object):
     EXTRAMOD_TXT = """Help: <b>Extra Modules</b>
 
 <b>NOTE:</b>
-These are the extra features of Samantha 
+These are the extra features of Mine. 
 
 <b>Commands and Usage:</b>
 • /id - <code>get id of a specified user.</code>
