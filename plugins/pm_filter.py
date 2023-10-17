@@ -331,7 +331,7 @@ async def language_check(bot, query):
         
         btn.insert(0, [
             InlineKeyboardButton("🔃 PM All", callback_data=f"send_fall#{pre}#{0}#{userid}"),
-            InlineKeyboardButton("Language 🔣", callback_data=f"select_lang#{req}")
+            InlineKeyboardButton("Language 🔣", callback_data=f"select_lang#{userid}")
         ])
 
         if offset != "":
