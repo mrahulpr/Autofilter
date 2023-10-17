@@ -1,10 +1,10 @@
 class script(object):
     START_TXT = """<b>Hi 👋 {},</b>
-<b>My Name is <a href='https://t.me/newallfilmbot'>- Samantha -</a>, \nI can provide movies in your Group, \nJust add me to your group and i will do my work 😜.....</b>"""
-    HELP_TXT = """Hei 🐳 {}
-<b>Here is the help for my COMMANDs.</b>"""
-    ABOUT_TXT = """✯ <b>My Name: Samantha </b>
-✯ <b>Creator: <a href='https://t.me/rahulp_r'>This Person</a> </b> 
+<b>My Name is <a href='https://t.me/allfilm_bot'>Pliky Bot</a>, \nI can provide movies in your PM, \nJust send me your movie name and i will do my work 😜.....</b>"""
+    HELP_TXT = """Hi 🐳 {}
+<b>Here is the help for my Commands.</b>"""
+    ABOUT_TXT = """✯ <b>My Name: Pliky Bot </b>
+✯ <b>Creator: @rahulp_r </b> 
 ✯ <b>Library: Pyrogram</b>
 ✯ <b>Language: Python 3</b>
 ✯ <b>Data Base: MONGO DB</b>
