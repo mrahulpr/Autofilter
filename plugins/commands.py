@@ -696,16 +696,7 @@ async def requests(bot, message):
         except Exception as e:
             await message.reply_text(f"Error: {e}")
             pass
-        
-    elif chat_id = message.chat.id
-        reporter = str(message.from_user.id)
-        mention = message.from_user.mention
-        success = True
-        content = message.text
-        keywords = ["#request", "/request", "#Request", "/Request"]
-        for keyword in keywords:
-            if keyword in content:
-                content = content.replace(keyword, "")
+            
         try:
             if REQST_CHANNEL is not None and len(content) >= 3:
                 btn = [[
