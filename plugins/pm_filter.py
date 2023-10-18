@@ -38,7 +38,7 @@ BUTTONS = {}
 SPELL_CHECK = {}
 
 
-@Client.on_message(filters.group & filters.text  & filters.incoming)
+@Client.on_message((filters.group | filters.private) & filters.text  & filters.incoming)
 async def give_filter(client, message):
     if message.chat.id != SUPPORT_CHAT_ID:
         glob = await global_filters(client, message)
@@ -667,13 +667,13 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
                     return
                 else:
-                    await query.answer(f"Hᴇʏ {query.from_user.first_name}, Tʜɪs Is Nᴏᴛ Yᴏᴜʀ Mᴏᴠɪᴇ Rᴇǫᴜᴇsᴛ. Rᴇǫᴜᴇsᴛ Yᴏᴜʀ's !", show_alert=True)
+                    await query.answer(f"എന്റെ മോനെ ഇത് നിനക്ക് ഉള്ളത് അല്ല🤭....", show_alert=True)
             elif settings['botpm']:
                 if clicked == typed:
                     await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
                     return
                 else:
-                    await query.answer(f"Hᴇʏ {query.from_user.first_name}, Tʜɪs Is Nᴏᴛ Yᴏᴜʀ Mᴏᴠɪᴇ Rᴇǫᴜᴇsᴛ. Rᴇǫᴜᴇsᴛ Yᴏᴜʀ's !", show_alert=True)
+                    await query.answer(f"എന്റെ മോനെ ഇത് നിനക്ക് ഉള്ളത് അല്ല🤭....", show_alert=True)
             else:
                 if clicked == typed:
                     if IS_VERIFY and not await check_verification(client, query.from_user.id):
@@ -698,22 +698,22 @@ async def cb_handler(client: Client, query: CallbackQuery):
                             protect_content=True if ident == "filep" else False,
                             reply_markup=InlineKeyboardMarkup(
                                 [[
-                          InlineKeyboardButton("Owner 😉", url="t.me/rahulp_r")
+                          InlineKeyboardButton("Updates", url=f'https://t.me/allfilmbots')
                                 ]] 
                             )
                         )
-                        return await query.answer('Cʜᴇᴄᴋ PM, I ʜᴀᴠᴇ sᴇɴᴛ ғɪʟᴇs ɪɴ PM', show_alert=True)
+                        return await query.answer('File ഞാൻ സ്വകാര്യമായി (PM) അയച്ചിട്ടുണ്ട്.... അവിടെ പോയി നോക്ക് ഫയൽ ഉണ്ട് 😜....', show_alert=True)
                 else:
-                    return await query.answer(f"Hᴇʏ {query.from_user.first_name}, Tʜɪs Is Nᴏᴛ Yᴏᴜʀ Mᴏᴠɪᴇ Rᴇǫᴜᴇsᴛ. Rᴇǫᴜᴇsᴛ Yᴏᴜʀ's !", show_alert=True)
+                    return await query.answer(f"എന്റെ മോനെ ഇത് നിനക്ക് ഉള്ളത് അല്ല🤭....", show_alert=True)
         except UserIsBlocked:
-            await query.answer('Uɴʙʟᴏᴄᴋ ᴛʜᴇ ʙᴏᴛ ᴍᴀʜɴ !', show_alert=True)
+            await query.answer('നീ എന്നെ BLOCK ആക്കി വച്ചിരിക്കുകയാണ്🤕..... എന്നെ UN-BLOCK ചെയ്താലേ നിനക്ക് പടം അയക്കാൻ കഴിയുകയുള്ളൂ🤐🤐.....', show_alert=True)
         except PeerIdInvalid:
             await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
         except Exception as e:
             await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
     elif query.data.startswith("checksub"):
         if AUTH_CHANNEL and not await is_subscribed(client, query):
-            await query.answer("Join Channel Mahn...!", show_alert=True)
+            await query.answer("എന്നോട് കളിക്കല്ലേ മോനെ😉... നീ ആദ്യം ജോയിൻ ചെയ്യ്.....", show_alert=True)
             return
         ident, file_id = query.data.split("#")
         if file_id == "send_all":
