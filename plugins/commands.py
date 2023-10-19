@@ -63,7 +63,7 @@ async def start(client, message):
         btn = [
             [
                 InlineKeyboardButton(
-                    "Join Channel 😁", url=invite_link.invite_link
+                    "Updates 📢", url=https://t.me/allfilmbots
                 )
             ]
         ]
@@ -77,7 +77,7 @@ async def start(client, message):
                 btn.append([InlineKeyboardButton("🔄 Try Again", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
         await client.send_message(
             chat_id=message.from_user.id,
-            text="**Yᴏᴜ ᴀʀᴇ ɴᴏᴛ ɪɴ ᴏᴜʀ Bᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ ɢɪᴠᴇɴ ʙᴇʟᴏᴡ sᴏ ʏᴏᴜ ᴅᴏɴ'ᴛ ɢᴇᴛ ᴛʜᴇ ᴍᴏᴠɪᴇ ғɪʟᴇ...\n\nIғ ʏᴏᴜ ᴡᴀɴᴛ ᴛʜᴇ ᴍᴏᴠɪᴇ ғɪʟᴇ, ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ '❆ Jᴏɪɴ Oᴜʀ Bᴀᴄᴋ-Uᴘ Cʜᴀɴɴᴇʟ ❆' ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ ᴀɴᴅ ᴊᴏɪɴ ᴏᴜʀ ʙᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ, ᴛʜᴇɴ ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ '↻ Tʀʏ Aɢᴀɪɴ' ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ...\n\nTʜᴇɴ ʏᴏᴜ ᴡɪʟʟ ɢᴇᴛ ᴛʜᴇ ᴍᴏᴠɪᴇ ғɪʟᴇs...**",
+            text="**പടം കിട്ടാനായി എന്റെ ചാനലിൽ  ജോയിൻ ചെയ്യൂ... \nഅതിനുശേഷം 🔄 Try Again അമർത്തൂ.... **",
             reply_markup=InlineKeyboardMarkup(btn),
             parse_mode=enums.ParseMode.MARKDOWN
             )
@@ -596,8 +596,8 @@ async def settings(client, message):
         ]
 
         btn = [[
-                InlineKeyboardButton("Oᴘᴇɴ Hᴇʀᴇ ↓", callback_data=f"opnsetgrp#{grp_id}"),
-                InlineKeyboardButton("Oᴘᴇɴ Iɴ PM ⇲", callback_data=f"opnsetpm#{grp_id}")
+                InlineKeyboardButton("📄 Open Here", callback_data=f"opnsetgrp#{grp_id}"),
+                InlineKeyboardButton("Open In Pm 🤗", callback_data=f"opnsetpm#{grp_id}")
               ]]
 
         reply_markup = InlineKeyboardMarkup(buttons)
@@ -666,7 +666,8 @@ async def save_template(client, message):
 
 @Client.on_message((filters.command(["request", "Request"]) | filters.regex("#request") | filters.regex("#Request")) & (filters.group | filters.private))
 async def requests(bot, message):
-    if message.reply_to_message == message.chat.id:
+        if REQST_CHANNEL is None or SUPPORT_CHAT_ID is None: return # Must add REQST_CHANNEL and SUPPORT_CHAT_ID to use this feature
+       if message.reply_to_message and SUPPORT_CHAT_ID == message.chat.id:
         chat_id = message.chat.id
         reporter = str(message.from_user.id)
         mention = message.from_user.mention
