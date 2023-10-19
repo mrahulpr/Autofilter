@@ -63,7 +63,7 @@ async def start(client, message):
         btn = [
             [
                 InlineKeyboardButton(
-                    "Updates 📢", url=https://t.me/allfilmbots
+                    "Updates 📢" , url=invite_link.invite_link
                 )
             ]
         ]
