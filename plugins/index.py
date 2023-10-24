@@ -93,7 +93,7 @@ async def send_for_index(bot, message):
             f'Do you Want To Index This Channel/ Group ?\n\n• Chat - <code>{chat_id}</code>\n• Last Message ID - <code>{last_msg_id}</code>',
             reply_markup=reply_markup)
 
-        if type(chat_id) is int:
+    if type(chat_id) is int:
         try:
             link = (await bot.create_chat_invite_link(chat_id)).invite_link
         except ChatAdminRequired:
