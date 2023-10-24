@@ -84,11 +84,8 @@ async def send_for_index(bot, message):
     if message.from_user.id in ADMINS:
         buttons = [
             [
-                InlineKeyboardButton('✔️ Yes',
-                                     callback_data=f'index#accept#{chat_id}#{last_msg_id}#{message.from_user.id}')
-            ],
-            [
-                InlineKeyboardButton('Close 🗝 ', callback_data='close_data'),
+            InlineKeyboardButton('✔️ Yes', callback_data=f'index#accept#{chat_id}#{last_msg_id}#{message.from_user.id}'),
+            InlineKeyboardButton('Close 🔒 ', callback_data='close_data')
             ]
         ]
         reply_markup = InlineKeyboardMarkup(buttons)
@@ -96,28 +93,24 @@ async def send_for_index(bot, message):
             f'Do you Want To Index This Channel/ Group ?\n\n• Chat - <code>{chat_id}</code>\n• Last Message ID - <code>{last_msg_id}</code>',
             reply_markup=reply_markup)
 
-    if type(chat_id) is int:
+        if type(chat_id) is int:
         try:
             link = (await bot.create_chat_invite_link(chat_id)).invite_link
         except ChatAdminRequired:
-            return await message.reply('🔐 Make sure iam an admin in the chat and have permission to invite users.')
+            return await message.reply('Make sure iam an admin in the chat and have permission to invite users.')
     else:
         link = f"@{message.forward_from_chat.username}"
     buttons = [
         [
-            InlineKeyboardButton('📇 Accept',
-                                 callback_data=f'index#accept#{chat_id}#{last_msg_id}#{message.from_user.id}')
-        ],
-        [
-            InlineKeyboardButton('Reject ❌',
-                                 callback_data=f'index#reject#{chat_id}#{message.id}#{message.from_user.id}'),
-        ]
+            InlineKeyboardButton('✔️ Accept', callback_data=f'index#accept#{chat_id}#{last_msg_id}#{message.from_user.id}'),
+            InlineKeyboardButton('Reject ❌', callback_data=f'index#reject#{chat_id}#{message.id}#{message.from_user.id}')
+        ] 
     ]
     reply_markup = InlineKeyboardMarkup(buttons)
     await bot.send_message(LOG_CHANNEL,
-                           f'#IndexRequest\n\n• From - {message.from_user.mention} (<code>{message.from_user.id}</code>)\n• Chat - <code> {chat_id}</code>\n• Last Message ID - <code>{last_msg_id}</code>\n• InviteLink - {link}',
+                           f'#IndexRequest\n\n• From - {message.from_user.mention} (<code>{message.from_user.id}</code>)\n• Chat - <code> {chat_id}</code>\n• Message ID - <code>{last_msg_id}</code>\n• InviteLink - {link}',
                            reply_markup=reply_markup)
-    await message.reply('ThankYou For the Contribution, Wait For My Moderators to verify the files.')
+    await message.reply('✔️ ThankYou For the Contribution, Wait For My Moderators to verify the files.')
 
 
 @Client.on_message(filters.command('setskip') & filters.user(ADMINS))
@@ -128,7 +121,7 @@ async def set_skip_number(bot, message):
             skip = int(skip)
         except:
             return await message.reply("Skip number should be an integer.")
-        await message.reply(f"Successfully set SKIP number as {skip}")
+        await message.reply(f"✔️ Successfully set SKIP number as {skip}")
         temp.CURRENT = int(skip)
     else:
         await message.reply("Give me a skip number")
@@ -154,7 +147,7 @@ async def index_files_to_db(lst_msg_id, chat, msg, bot):
                     can = [[InlineKeyboardButton('❌ Cancel', callback_data='index_cancel')]]
                     reply = InlineKeyboardMarkup(can)
                     await msg.edit_text(
-                        text=f"• <b>Total Files - </b><code>{current}</code>\n<b>• Saved Files -  </b><code>{total_files}</code>\n• <b>Duplicate Files -  </b><code>{duplicate}</code>\n• <b>Deleted Messages - </b><code>{deleted}</code>\n• <b>Non-Media messages - </b><code>{no_media + unsupported}</code>(Unsupported Media - `{unsupported}` )\n• <b>Errors Occurred - </b><code>{errors}</code>",
+                        text=f"<b>Index Status 📶 </b>\n \n• <b>Total Files - </b><code>{current}</code>\n<b>• Saved Files -  </b><code>{total_files}</code>\n• <b>Duplicate Files -  </b><code>{duplicate}</code>\n• <b>Deleted Messages - </b><code>{deleted}</code>\n• <b>Non-Media messages - </b><code>{no_media + unsupported}</code>\n• <b>Errors Occurred - </b><code>{errors}</code>",
                         reply_markup=reply)
                 if message.empty:
                     deleted += 1
