@@ -36,25 +36,24 @@ logger.setLevel(logging.ERROR)
 
 BUTTONS = {}
 SPELL_CHECK = {}
-
+QUERY = {}
+PM_FILTER_MODE = True
 
 @Client.on_message(filters.group & filters.text  & filters.incoming)
 async def give_filter(client, message):
+    start_time = time.time()
     if message.chat.id != SUPPORT_CHAT_ID:
-        glob = await global_filters(client, message)
-        if glob == False:
-            manual = await manual_filters(client, message)
-            if manual == False:
-                settings = await get_settings(message.chat.id)
-                try:
-                    if settings['auto_ffilter']:
-                        await auto_filter(client, message)
-                except KeyError:
-                    grpid = await active_connection(str(message.from_user.id))
-                    await save_group_settings(grpid, 'auto_ffilter', True)
-                    settings = await get_settings(message.chat.id)
-                    if settings['auto_ffilter']:
-                        await auto_filter(client, message)
+        if PM_FILTER_MODE:
+            user = message.from_user.id
+            key = f"{message.id}"
+            QUERY[key] = search
+            end_time = time.time() 
+            execution_time = end_time - start_time
+            last = "{:.2f}".format(execution_time % 60)
+            msg = await message.reply_text(text=f"<b>Fᴏᴜɴᴅ Fᴏʀ Yᴏᴜʀ Qᴜᴇʀʏ {search} {total_results} Rᴇꜱᴜʟᴛꜱ Aᴠᴀɪʟᴀʙʟᴇ...😇\n\nCʟɪᴄᴋ Tʜᴇ Bᴇʟᴏᴡ Bᴜᴛᴛᴏɴ Fᴏʀ Gᴇᴛ Tʜᴇ Mᴏᴠɪᴇ🤝</b>", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Cʟɪᴄᴋ Hᴇʀᴇ", callback_data=f"pmswith_{key}_{user}")]]))
+            await asyncio.sleep(600)
+            await msg.delete()
+            await message.delete()
     else: #a better logic to avoid repeated lines of code in auto_filter function
         search = message.text
         temp_files, temp_offset, total_results = await get_search_results(chat_id=message.chat.id, query=search.lower(), offset=0, filter=True)
