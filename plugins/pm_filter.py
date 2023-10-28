@@ -1,5 +1,6 @@
 # Kanged From @TroJanZheX
 import asyncio
+import time
 import re
 import ast
 import math
