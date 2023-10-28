@@ -55,13 +55,9 @@ async def bot_status(client,message):
                 leftperc = math.floor(quota_left / total_quota * 100)
 
                 quota_details = f"""
-Heroku Account Status
-➪ 𝖸𝗈𝗎 𝗁𝖺𝗏𝖾 {total} 𝗁𝗈𝗎𝗋𝗌 𝗈𝖿 𝖿𝗋𝖾𝖾 𝖽𝗒𝗇𝗈 𝗊𝗎𝗈𝗍𝖺 𝖺𝗏𝖺𝗂𝗅𝖺𝖻𝗅𝖾 𝖾𝖺𝖼𝗁 𝗆𝗈𝗇𝗍𝗁.
-➪ 𝖣𝗒𝗇𝗈 𝗁𝗈𝗎𝗋𝗌 𝗎𝗌𝖾𝖽 𝗍𝗁𝗂𝗌 𝗆𝗈𝗇𝗍𝗁:
-        • {used} 𝖧𝗈𝗎𝗋𝗌 ( {usedperc}% )
-➪ 𝖣𝗒𝗇𝗈 𝗁𝗈𝗎𝗋𝗌 𝗋𝖾𝗆𝖺𝗂𝗇𝗂𝗇𝗀 𝗍𝗁𝗂𝗌 𝗆𝗈𝗇𝗍𝗁:
-        • {hours} 𝖧𝗈𝗎𝗋𝗌 ( {leftperc}% )
-        • Approximately {days} days!"""
+💽 Total : {total}
+🗳️ Used : {used}Hrs ({usedperc}%)
+💻 Left : {hours}Hrs / {days} days ({leftperc}%)
             else:
                 quota_details = ""
         except:
@@ -79,15 +75,14 @@ Heroku Account Status
         free = humanbytes(f)
 
         disk = "\n**Disk Details**\n\n" \
-            f"> USED  :  {used} / {total}\n" \
-            f"> FREE  :  {free}\n\n"
+            f"⚠️ Used : {used} / {total}\n" \
+            f"❇️ Free : {free}\n\n"
     except:
         disk = ""
 
     await message.reply_text(
-        "𝗖𝘂𝗿𝗿𝗲𝗻𝘁 𝘀𝘁𝗮𝘁𝘂𝘀 𝗼𝗳 𝘆𝗼𝘂𝗿 𝗕𝗼𝘁\n\n"
-        "DB Status\n"
-        f"➪ 𝖡𝗈𝗍 𝖴𝗉𝗍𝗂𝗆𝖾: {uptime}\n"
+        "<b>📶 Current Status</b>\n\n"
+        f"🔋𝖴𝗉𝗍𝗂𝗆𝖾: {uptime}\n"
         f"{quota_details}"
         f"{disk}",
         quote=True,
