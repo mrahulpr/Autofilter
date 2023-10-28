@@ -55,7 +55,6 @@ async def bot_status(client,message):
                 leftperc = math.floor(quota_left / total_quota * 100)
 
                 quota_details = f"""
-💽 Total : {total}
 🗳️ Used : {used}Hrs ({usedperc}%)
 💻 Left : {hours}Hrs / {days} days ({leftperc}%)"""
             else:
@@ -81,8 +80,8 @@ async def bot_status(client,message):
         disk = ""
 
     await message.reply_text(
-        "<b>📶 Current Status</b>\n\n"
-        f"🔋𝖴𝗉𝗍𝗂𝗆𝖾: {uptime}\n"
+        "**📶 Current Status**\n\n"
+        f"🔋𝖴𝗉𝗍𝗂𝗆𝖾: {uptime}"
         f"{quota_details}"
         f"{disk}",
         quote=True,
