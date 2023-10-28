@@ -716,6 +716,11 @@ async def cb_handler(client: Client, query: CallbackQuery):
             await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
         except Exception as e:
             await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
+    elif query.data.startswith("pmswith"):
+        _, key, user = query.data.split("_")
+        if int(user) not in [query.from_user.id, 0]:
+            return await query.answer("Not For You", show_alert=True)
+        await query.answer(url=f"https://t.me/{temp.U_NAME}?start=pmfilter_{key}")
     elif query.data.startswith("checksub"):
         if AUTH_CHANNEL and not await is_subscribed(client, query):
             await query.answer("എന്നോട് കളിക്കല്ലേ മോനെ😉... നീ ആദ്യം ജോയിൻ ചെയ്യ്.....", show_alert=True)
