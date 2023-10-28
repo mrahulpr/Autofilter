@@ -252,7 +252,7 @@ async def start(client, message):
         key = file_id
         search = QUERY.get(key)
         ms = await message.reply_text(f"<b>Pʟᴇᴀꜱ W𝟾..😇</b>")
-        files, offset, total_results = await get_search_results(query=search.lower(), offset=0, filter=True)
+        files, offset, total_results = await get_search_results(chat_id=None, query=search.lower(), offset=0, filter=True)
         #ms = await message.reply_text(f"Searching For {search}")
         base_str = f"<b>Hᴇʏ..{message.from_user.mention}\n\nYᴏᴜʀ Sᴇʀᴄʜ  Rᴇꜱᴜʟᴛ [{search}]</b>"
         ident = "file"
