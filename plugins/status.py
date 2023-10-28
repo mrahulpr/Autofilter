@@ -57,7 +57,7 @@ async def bot_status(client,message):
                 quota_details = f"""
 💽 Total : {total}
 🗳️ Used : {used}Hrs ({usedperc}%)
-💻 Left : {hours}Hrs / {days} days ({leftperc}%)
+💻 Left : {hours}Hrs / {days} days ({leftperc}%)"""
             else:
                 quota_details = ""
         except:
