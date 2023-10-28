@@ -14,9 +14,12 @@ from database.connections_mdb import active_connection
 import re
 import json
 import base64
+from plugins.pm_filter import QUERY
+
 logger = logging.getLogger(__name__)
 
 BATCH_FILES = {}
+PM_BUTTONS = {}
 
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client, message):
@@ -245,7 +248,36 @@ async def start(client, message):
                 text="<b>Iɴᴠᴀʟɪᴅ ʟɪɴᴋ ᴏʀ Exᴘɪʀᴇᴅ ʟɪɴᴋ !</b>",
                 protect_content=True if PROTECT_CONTENT else False
             )
-
+    if pre == "pmfilter":
+        key = file_id
+        search = QUERY.get(key)
+        ms = await message.reply_text(f"<b>Pʟᴇᴀꜱ W𝟾..😇</b>")
+        files, offset, total_results = await get_search_results(query=search.lower(), offset=0, filter=True)
+        #ms = await message.reply_text(f"Searching For {search}")
+        base_str = f"<b>Hᴇʏ..{message.from_user.mention}\n\nYᴏᴜʀ Sᴇʀᴄʜ  Rᴇꜱᴜʟᴛ [{search}]</b>"
+        ident = "file"
+        btn = []
+        if offset != "":
+            key = f"{message.chat.id}-{message.id}"
+            PM_BUTTONS[key] = search
+            req = message.from_user.id if message.from_user else 0
+            btn.append(
+                [InlineKeyboardButton(text=f"📃 1/{math.ceil(int(total_results) / 6)}", callback_data="pages"),
+                 InlineKeyboardButton(text="NEXT ▶️", callback_data=f"pmnext_{req}_{key}_{offset}")]
+            )
+        else:
+            btn.append(
+                [InlineKeyboardButton(text="📃 1/1", callback_data="pages")]
+            )
+        btn.append(
+            [InlineKeyboardButton(text="Send Movie Details", callback_data=f"snddls#{file_id}")]
+        )
+        for file in files:
+            if not SHORT_LINK:
+                base_str += f"\n\n➡️<b><a href='https://t.me/{temp.U_NAME}?start=file_{file.file_id}'>[{get_size(file.file_size)}] {file.file_name}</a></b>"
+            else:
+                base_str += f"\n\n➡️<b><a href='https://t.me/{temp.U_NAME}?start=short-{ident}-{file.file_id}'>[{get_size(file.file_size)}] {file.file_name}</a></b>"
+        return await ms.edit(base_str, reply_markup=InlineKeyboardMarkup(btn), parse_mode=enums.ParseMode.HTML, disable_web_page_preview=True)
     files_ = await get_file_details(file_id)           
     if not files_:
         pre, file_id = ((base64.urlsafe_b64decode(data + "=" * (-len(data) % 4))).decode("ascii")).split("_", 1)
