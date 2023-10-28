@@ -45,7 +45,7 @@ async def give_filter(client, message):
     if message.chat.id != SUPPORT_CHAT_ID:
         if PM_FILTER_MODE:
             search = message.text
-            temp_files, temp_offset, total_results = await get_search_results(query=search.lower(), offset=0, filter=True)
+            temp_files, temp_offset, total_results = await get_search_results(chat_id=None, query=search.lower(), offset=0, filter=True)
             if total_results == 0:
                 return await advantage_spell_chok(client, message)
             user = message.from_user.id
@@ -58,6 +58,8 @@ async def give_filter(client, message):
             await asyncio.sleep(600)
             await msg.delete()
             await message.delete()
+        else:
+            await auto_filter(client, message)
     else: #a better logic to avoid repeated lines of code in auto_filter function
         search = message.text
         temp_files, temp_offset, total_results = await get_search_results(chat_id=message.chat.id, query=search.lower(), offset=0, filter=True)
