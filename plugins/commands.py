@@ -403,57 +403,6 @@ async def pmnexter(bot, query):
         )
     await bot.edit_message_text(query.message.chat.id, query.message.id, text, reply_markup=InlineKeyboardMarkup(btn), parse_mode=enums.ParseMode.HTML, disable_web_page_preview=True)
         
-
-
-@Client.on_callback_query(filters.regex(r"^pmnext"))
-async def pmnexter(bot, query):
-    ident, req, key, offset = query.data.split("_")
-    try:
-        offset = int(offset)
-    except:
-        offset = 0
-    search = PM_BUTTONS.get(key)
-    if not search:
-        await query.answer("You are using one of my old messages, please send the request again.", show_alert=True)
-        return
-    files, n_offset, total = await get_search_results(search, query=search.lower(), offset=offset, filter=True)
-    try:
-        n_offset = int(n_offset)
-    except:
-        n_offset = 0
-
-    if not files:
-        return
-    btn = []
-    text = f"<b>Hᴇʏ..{query.from_user.mention}\n\nYᴏᴜʀ Sᴇʀᴄʜ  Rᴇꜱᴜʟᴛ [{search}]</b>"
-    for file in files:
-        text += f"\n\n➡️<b><a href='https://t.me/{temp.U_NAME}?start=file_{file.file_id}'>[{get_size(file.file_size)}] {file.file_name}</a></b>"
-    if 0 < offset <= 6:
-        off_set = 0
-    elif offset == 0:
-        off_set = None
-    else:
-        off_set = offset - 6
-    if n_offset == 0:
-        btn.append(
-            [InlineKeyboardButton("◀️ BACK", callback_data=f"pmnext_{req}_{key}_{off_set}"),
-             InlineKeyboardButton(f"📃 {math.ceil(int(offset) / 6) + 1} / {math.ceil(total / 6)}",
-                                  callback_data="pages")]
-        )
-    elif off_set is None:
-        btn.append(
-            [InlineKeyboardButton(f"📃 {math.ceil(int(offset) / 6) + 1} / {math.ceil(total / 6)}", callback_data="pages"),
-             InlineKeyboardButton("NEXT ▶️", callback_data=f"pmnext_{req}_{key}_{n_offset}")])
-    else:
-        btn.append(
-            [
-                InlineKeyboardButton("◀️ BACK", callback_data=f"pmnext_{req}_{key}_{off_set}"),
-                InlineKeyboardButton(f"📃 {math.ceil(int(offset) / 6) + 1} / {math.ceil(total / 6)}", callback_data="pages"),
-                InlineKeyboardButton("NEXT ▶️", callback_data=f"pmnext_{req}_{key}_{n_offset}")
-            ],
-        )
-    await bot.edit_message_text
-
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
 async def channel_info(bot, message):
            
