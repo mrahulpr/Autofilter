@@ -274,10 +274,7 @@ async def start(client, message):
             [InlineKeyboardButton(text="Send Movie Details", callback_data=f"snddls#{file_id}")]
         )
         for file in files:
-            if not SHORT_LINK:
-                base_str += f"\n\n➡️<b><a href='https://t.me/{temp.U_NAME}?start=file_{file.file_id}'>[{get_size(file.file_size)}] {file.file_name}</a></b>"
-            else:
-                base_str += f"\n\n➡️<b><a href='https://t.me/{temp.U_NAME}?start=short-{ident}-{file.file_id}'>[{get_size(file.file_size)}] {file.file_name}</a></b>"
+            base_str += f"\n\n➡️<b><a href='https://t.me/{temp.U_NAME}?start=short-{ident}-{file.file_id}'>[{get_size(file.file_size)}] {file.file_name}</a></b>"
         return await ms.edit(base_str, reply_markup=InlineKeyboardMarkup(btn), parse_mode=enums.ParseMode.HTML, disable_web_page_preview=True)
     files_ = await get_file_details(file_id)           
     if not files_:
