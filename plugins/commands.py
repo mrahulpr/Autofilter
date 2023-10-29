@@ -15,6 +15,7 @@ import re
 import json
 import base64
 from plugins.pm_filter import QUERY
+import math
 
 logger = logging.getLogger(__name__)
 
