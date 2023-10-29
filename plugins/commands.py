@@ -367,7 +367,7 @@ async def pmnexter(bot, query):
     if not search:
         await query.answer("You are using one of my old messages, please send the request again.", show_alert=True)
         return
-    files, n_offset, total = await get_search_results(search, offset=offset, filter=True)
+    files, n_offset, total = await get_search_results(search, query=search.lower(), offset=offset, filter=True)
     try:
         n_offset = int(n_offset)
     except:
