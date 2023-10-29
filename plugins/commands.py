@@ -270,11 +270,8 @@ async def start(client, message):
             btn.append(
                 [InlineKeyboardButton(text="📃 1/1", callback_data="pages")]
             )
-        btn.append(
-            [InlineKeyboardButton(text="Send Movie Details", callback_data=f"snddls#{file_id}")]
-        )
         for file in files:
-            base_str += f"\n\n➡️<b><a href='https://t.me/{temp.U_NAME}?start=short-{ident}-{file.file_id}'>[{get_size(file.file_size)}] {file.file_name}</a></b>"
+            base_str += f"\n\n➡️<b><a href='https://t.me/{temp.U_NAME}?start={ident}_{file.file_id}'>[{get_size(file.file_size)}] {file.file_name}</a></b>"
         return await ms.edit(base_str, reply_markup=InlineKeyboardMarkup(btn), parse_mode=enums.ParseMode.HTML, disable_web_page_preview=True)
     files_ = await get_file_details(file_id)           
     if not files_:
