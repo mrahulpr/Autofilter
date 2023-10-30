@@ -40,7 +40,7 @@ SPELL_CHECK = {}
 QUERY = {}
 PM_FILTER_MODE = True
 
-@Client.on_message(filters.group & filters.text  & filters.incoming)
+@Client.on_message((filters.group | filters.private) & filters.text  & filters.incoming)
 async def give_filter(client, message):
     start_time = time.time()
     if message.chat.id != SUPPORT_CHAT_ID:
@@ -55,7 +55,7 @@ async def give_filter(client, message):
             end_time = time.time() 
             execution_time = end_time - start_time
             last = "{:.2f}".format(execution_time % 60)
-            msg = await message.reply_text(text=f"<b>• Title : {search} \n• Files : {total_results} \n\n © @allfilmbots </b>", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("📤 Download", callback_data=f"pmswith_{key}_{user}")]]))
+            msg = await message.reply_text(text=f"<b>• Title : #{search} \n• Total Files : {total_results} \n\n © @allfilmbots </b>", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("📤 Download", callback_data=f"pmswith_{key}_{user}")]]))
             await asyncio.sleep(600)
             await msg.delete()
             await message.delete()
