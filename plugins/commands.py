@@ -252,7 +252,7 @@ async def start(client, message):
     if pre == "pmfilter":
         key = file_id
         search = QUERY.get(key)
-        ms = await message.reply_text(f"<b>Pʟᴇᴀꜱ W𝟾..😇</b>")
+        ms = await message.reply_text(f"<b>Collecting All files 📂...... </b>")
         files, offset, total_results = await get_search_results(chat_id=None, query=search.lower(), offset=0, filter=True)
         #ms = await message.reply_text(f"Searching For {search}")
         base_str = f"<b>Hᴇʏ..{message.from_user.mention}\n\nYᴏᴜʀ Sᴇʀᴄʜ  Rᴇꜱᴜʟᴛ [{search}]</b>"
@@ -271,7 +271,7 @@ async def start(client, message):
                 [InlineKeyboardButton(text="📃 1/1", callback_data="pages")]
             )
         for file in files:
-            base_str += f"\n\n➡️<b><a href='https://t.me/{temp.U_NAME}?start=file_{file.file_id}'>[{get_size(file.file_size)}] {file.file_name}</a></b>"
+            base_str += f"\n\n➡️<b><a href='https://t.me/{temp.U_NAME}?start=file_{file.file_id}'>{get_size(file.file_size)} • {file.file_name}</a></b>"
         return await ms.edit(base_str, reply_markup=InlineKeyboardMarkup(btn), parse_mode=enums.ParseMode.HTML, disable_web_page_preview=True)
     files_ = await get_file_details(file_id)           
     if not files_:
