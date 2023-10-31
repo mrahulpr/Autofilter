@@ -44,23 +44,25 @@ PM_FILTER_MODE = True
 async def give_filter(client, message):
     start_time = time.time()
     if message.chat.id != SUPPORT_CHAT_ID:
-        if PM_FILTER_MODE:
-            search = message.text
-            temp_files, temp_offset, total_results = await get_search_results(chat_id=None, query=search.lower(), offset=0, filter=True)
-            if total_results == 0:
-                return await advantage_spell_chok(client, message)
-            user = message.from_user.id
-            key = f"{message.id}"
-            QUERY[key] = search
-            end_time = time.time() 
-            execution_time = end_time - start_time
-            last = "{:.2f}".format(execution_time % 60)
-            msg = await message.reply_text(text=f"<b>• Title : #{search} \n• Total Files : {total_results} \n\n © @allfilmbots </b>", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("📤 Download", callback_data=f"pmswith_{key}_{user}")]]))
-            await asyncio.sleep(600)
-            await msg.delete()
-            await message.delete()
-        else:
-            await auto_filter(client, message)
+        manual = await manual_filters(client, message)
+        if manual == False:
+            if PM_FILTER_MODE:
+                search = message.text
+                temp_files, temp_offset, total_results = await get_search_results(chat_id=None, query=search.lower(), offset=0, filter=True)
+                if total_results == 0
+                    return await advantage_spell_chok(client, message)
+                user = message.from_user.id
+                key = f"{message.id}"
+                QUERY[key] = search
+                end_time = time.time() 
+                execution_time = end_time - start_time
+                last = "{:.2f}".format(execution_time % 60)
+                msg = await message.reply_text(text=f"<b>• Title : #{search} \n• Total Files : {total_results} \n\n © @allfilmbots </b>", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("📤 Download", callback_data=f"pmswith_{key}_{user}")]]))
+                await asyncio.sleep(600)
+                await msg.delete()
+                await message.delete()
+            else:
+                await auto_filter(client, message)
     else: #a better logic to avoid repeated lines of code in auto_filter function
         search = message.text
         temp_files, temp_offset, total_results = await get_search_results(chat_id=message.chat.id, query=search.lower(), offset=0, filter=True)
