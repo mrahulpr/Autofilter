@@ -43,6 +43,7 @@ PM_FILTER_MODE = True
 @Client.on_message((filters.group | filters.private) & filters.text  & filters.incoming)
 async def give_filter(client, message):
     start_time = time.time()
+    if message.text.startswith("/"): return
     if message.chat.id != SUPPORT_CHAT_ID:
         glob = await global_filters(client, message)
         if glob == False:
