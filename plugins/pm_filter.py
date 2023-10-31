@@ -43,34 +43,26 @@ PM_FILTER_MODE = True
 @Client.on_message((filters.group | filters.private) & filters.text  & filters.incoming)
 async def give_filter(client, message):
     start_time = time.time()
+    if message.text.startswith("/"): return
     if message.chat.id != SUPPORT_CHAT_ID:
-        if PM_FILTER_MODE:
-            search = message.text
-            temp_files, temp_offset, total_results = await get_search_results(chat_id=None, query=search.lower(), offset=0, filter=True)
-            if total_results == 0:
-                return await advantage_spell_chok(client, message)
-            user = message.from_user.id
-            key = f"{message.id}"
-            QUERY[key] = search
-            end_time = time.time() 
-            execution_time = end_time - start_time
-            last = "{:.2f}".format(execution_time % 60)
-            msg = await message.reply_text(text=f"<b>• Title : #{search} \n• Total Files : {total_results} \n\n © @allfilmbots </b>", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("📤 Download", callback_data=f"pmswith_{key}_{user}")]]))
-            await asyncio.sleep(600)
-            await msg.delete()
-            await message.delete()
-        else:
-            await auto_filter(client, message)
-    else: #a better logic to avoid repeated lines of code in auto_filter function
-        search = message.text
-        temp_files, temp_offset, total_results = await get_search_results(chat_id=message.chat.id, query=search.lower(), offset=0, filter=True)
-        if total_results == 0:
-            return
-        else:
-            return await message.reply_text(
-                text=f"<b>Hᴇʏ {message.from_user.mention}, {str(total_results)} ʀᴇsᴜʟᴛs ᴀʀᴇ ғᴏᴜɴᴅ ɪɴ ᴍʏ ᴅᴀᴛᴀʙᴀsᴇ ғᴏʀ ʏᴏᴜʀ ᴏ̨ᴜᴇʀʏ {search}. Kɪɴᴅʟʏ ᴜsᴇ ɪɴʟɪɴᴇ sᴇᴀʀᴄʜ ᴏʀ ᴍᴀᴋᴇ ᴀ ɢʀᴏᴜᴘ ᴀɴᴅ ᴀᴅᴅ ᴍᴇ ᴀs ᴀᴅᴍɪɴ ᴛᴏ ɢᴇᴛ ᴍᴏᴠɪᴇ ғɪʟᴇs. Tʜɪs ɪs ᴀ sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ sᴏ ᴛʜᴀᴛ ʏᴏᴜ ᴄᴀɴ'ᴛ ɢᴇᴛ ғɪʟᴇs ғʀᴏᴍ ʜᴇʀᴇ...\n\nFᴏʀ Mᴏᴠɪᴇs, Jᴏɪɴ @free_movies_all_languages</b>",
-                parse_mode=enums.ParseMode.HTML
-            )
+        glob = await global_filters(client, message)
+        if glob == False:
+            if PM_FILTER_MODE:
+                search = message.text
+                temp_files, temp_offset, total_results = await get_search_results(chat_id=None, query=search.lower(), offset=0, filter=True)
+                user = message.from_user.id
+                key = f"{message.id}"
+                QUERY[key] = search
+                end_time = time.time() 
+                execution_time = end_time - start_time
+                last = "{:.2f}".format(execution_time % 60)
+                msg = await message.reply_text(text=f"<b>• Title : #{search} \n• Total Files : {total_results} \n\n © @allfilmbots </b>", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("📤 Download", callback_data=f"pmswith_{key}_{user}")]]))
+                await asyncio.sleep(600)
+                await msg.delete()
+                await message.delete()
+                if total_results == 0:
+                    return
+                
 
 
 @Client.on_callback_query(filters.regex(r"^next"))
