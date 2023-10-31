@@ -739,7 +739,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             else:
                 return await query.answer(f"Eʀʀᴏʀ: {is_over}", show_alert=True)
         if PM_FIlTER_MODE:
-            await query.answer('go back to group and click button again', show_alert=True)
+            await query.answer('go back to group and click button again🤌', show_alert=True)
         files_ = await get_file_details(file_id)
         if not files_:
             return
