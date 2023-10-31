@@ -44,8 +44,8 @@ PM_FILTER_MODE = True
 async def give_filter(client, message):
     start_time = time.time()
     if message.chat.id != SUPPORT_CHAT_ID:
-        manual = await manual_filters(client, message)
-        if manual == False:
+        glob = await global_filters(client, message)
+        if glob == False:
             if PM_FILTER_MODE:
                 search = message.text
                 temp_files, temp_offset, total_results = await get_search_results(chat_id=None, query=search.lower(), offset=0, filter=True)
@@ -59,6 +59,9 @@ async def give_filter(client, message):
                 await asyncio.sleep(600)
                 await msg.delete()
                 await message.delete()
+                if total_results == 0:
+                    return
+                
 
 
 @Client.on_callback_query(filters.regex(r"^next"))
