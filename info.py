@@ -46,6 +46,11 @@ DATABASE_URI = environ.get('DATABASE_URI', "")
 DATABASE_NAME = environ.get('DATABASE_NAME', "Rajappan")
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Telegram_files')
 
+#Paid Work Of Master 
+REQ_CHANNEL = environ.get("REQ_CHANNEL", "-1001814918425")
+REQ_CHANNEL = int(REQ_CHANNEL) if REQ_CHANNEL and id_pattern.search(REQ_CHANNEL) else AUTH_CHANNEL
+JOIN_REQS_DB = environ.get("JOIN_REQS_DB", DATABASE_URI)
+FSUB_MODE = "REQ"
 
 # Others
 IS_VERIFY = is_enabled((environ.get('IS_VERIFY', 'False')), False)
