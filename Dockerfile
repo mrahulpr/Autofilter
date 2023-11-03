@@ -1,5 +1,7 @@
 FROM python:3.10.8-slim-buster
 
+ARG API_ID
+
 RUN apt update && apt upgrade -y
 
 RUN apt install git -y
@@ -15,5 +17,9 @@ WORKDIR /DQTheFileDonor
 COPY start.sh /start.sh
 
 EXPOSE 8080
+
+ENV API_ID=$API_ID
+
+RUN echo "API_ID=$API_ID" >> /etc/environment
 
 CMD ["/bin/bash", "/start.sh"]
