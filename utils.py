@@ -672,7 +672,7 @@ async def send_all(bot, userid, files, ident):
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
-                        InlineKeyboardButton('📢 Updates', url=f'https://t.me/allfilmbots')   
+                        InlineKeyboardButton('📢 Updates', url=f'https://t.me/webotz')   
                         ]
                     ]
                 )
