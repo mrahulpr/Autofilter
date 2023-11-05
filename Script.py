@@ -4,12 +4,13 @@ class script(object):
     HELP_TXT = """Hi 🐳 {}
 <b>Here is the help for my Commands.</b>"""
     ABOUT_TXT = """✯ <b>My Name: Pliky Bot </b>
-✯ <b>Creator: @rahulp_r </b> 
+✯ <b>Creator: @rahulp_r </b>
 ✯ <b>Library: Pyrogram</b>
 ✯ <b>Language: Python 3</b>
 ✯ <b>Data Base: MONGO DB</b>
 ✯ <b>Server: HEROKU</b>
-✯ <b>Build Status: v1.3.0 [STABLE]</b>"""
+✯ <b>Updates: @webotz </b>
+✯ <b>Build Status: v1.9.1 [STABLE]</b>"""
     SOURCE_TXT = """<b>NOTE:</b>
 - Pliky Bot is not a open source project. 
 - Its code was based on EvaMaria repo which can be found in Github. \n- For any queries related to this bot contact <b>@rahulp_r</b>, and was the reason for my birth in Telegram 😘."""
@@ -81,7 +82,8 @@ This module only works for my admins
 
 <b>Commands and Usage:</b>
 • /logs - <code>to get the rescent errors</code>
-• /stats - <code>to get status of files in db.</code>
+• /stats - <code>to get status of files in db </code>
+• /status - <code>to get details about server </code>
 • /delete - <code>to delete a specific file from db.</code>
 • /users - <code>to get list of my users and ids.</code>
 • /chats - <code>to get list of the my chats and ids </code>
@@ -91,11 +93,11 @@ This module only works for my admins
 • /unban  - <code>to unban a user.</code>
 • /channel - <code>to get list of total connected channels</code>
 • /broadcast - <code>to broadcast a message to all users</code>"""
-    STATUS_TXT = """★ 𝚃𝙾𝚃𝙰𝙻 𝙵𝙸𝙻𝙴𝚂: <code>{}</code>
-★ 𝚃𝙾𝚃𝙰𝙻 𝚄𝚂𝙴𝚁𝚂: <code>{}</code>
-★ 𝚃𝙾𝚃𝙰𝙻 𝙲𝙷𝙰𝚃𝚂: <code>{}</code>
-★ 𝚄𝚂𝙴𝙳 𝚂𝚃𝙾𝚁𝙰𝙶𝙴: <code>{}</code> 𝙼𝚒𝙱
-★ 𝙵𝚁𝙴𝙴 𝚂𝚃𝙾𝚁𝙰𝙶𝙴: <code>{}</code> 𝙼𝚒𝙱"""
+    STATUS_TXT = """• 𝚃𝙾𝚃𝙰𝙻 𝙵𝙸𝙻𝙴𝚂: <code>{}</code>
+• 𝚃𝙾𝚃𝙰𝙻 𝚄𝚂𝙴𝚁𝚂: <code>{}</code>
+• 𝚃𝙾𝚃𝙰𝙻 𝙲𝙷𝙰𝚃𝚂: <code>{}</code>
+• 𝚄𝚂𝙴𝙳 𝚂𝚃𝙾𝚁𝙰𝙶𝙴: <code>{}</code> 𝙼𝚒𝙱
+• 𝙵𝚁𝙴𝙴 𝚂𝚃𝙾𝚁𝙰𝙶𝙴: <code>{}</code> 𝙼𝚒𝙱"""
     LOG_TEXT_G = """#NewGroup
 📂 Group = {}(<code>{}</code>)
 👨‍👧‍👦 Total Members = <code>{}</code>
