@@ -50,7 +50,7 @@ async def give_filter(client, message):
             if PM_FILTER_MODE:
                 search = message.text
                 temp_files, temp_offset, total_results = await get_search_results(chat_id=None, query=search.lower(), offset=0, filter=True)
-                user = message.from_user.id
+                req = message.from_user.id
                 key = f"{message.id}"
                 QUERY[key] = search
                 end_time = time.time() 
