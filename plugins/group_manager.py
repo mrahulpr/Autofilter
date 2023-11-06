@@ -66,7 +66,7 @@ async def mute_user(_, message):
     except Exception as error: await message.reply_text(str(error))
     else:
         if str(user_id).lower().startswith("@"):
-            await message.reply_text(f"👍🏻 {user_first_name} Lᴀᴠᴇɴᴅᴇʀ's Mᴏᴜᴛʜ Is Sʜᴜᴛ ! 🤐")
+            await message.reply_text(f"👍🏻 {user_first_name} Mᴏᴜᴛʜ Is Sʜᴜᴛ ! 🤐")
         else:
             await message.reply_text(f"👍🏻 <a href='tg://user?id={user_id}'>Oғ Lᴀᴠᴇɴᴅᴇʀ</a> Tʜᴇ Mᴏᴜᴛʜ Is Cʟᴏsᴇᴅ! 🤐")
 
