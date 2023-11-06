@@ -23,7 +23,7 @@ async def index_files(bot, query):
     if raju == 'reject':
         await query.message.delete()
         await bot.send_message(int(from_user),
-                               f'Sorry 😥, \nYour Submission for indexing {chat} has been decliened by our moderators.',
+                               f'Sorry 😥, \nYour Submission for indexing {chat} has been decliened by our moderators.\n \n ©@webotz ',
                                reply_to_message_id=int(lst_msg_id))
         return
 
@@ -34,7 +34,7 @@ async def index_files(bot, query):
     await query.answer('Processing...⏳', show_alert=True)
     if int(from_user) not in ADMINS:
         await bot.send_message(int(from_user),
-                               f'Done 🎬 \nYour Submission for indexing {chat} has been accepted by our moderators and will be added soon.',
+                               f'Done 🎬 \nYour Submission for indexing {chat} has been accepted by our moderators and will be added soon.\n \n ©@webotz',
                                reply_to_message_id=int(lst_msg_id))
     await msg.edit(
         "Starting Indexing",
