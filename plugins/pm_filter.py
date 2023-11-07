@@ -58,6 +58,7 @@ async def give_filter(client, message):
                 if total_results == 0:
                     req = message.from_user.id
                     msg = await message.reply_text(text=f"<b>Spelling Mistake Bro 🤐, Try Again with correct spelling. </b>", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Google it 😂 ", url=f"https://www.google.com/search?q={search}_movie")]]))
+                    await asyncio.sleep(600)
                     await msg.delete()
                     await message.delete()
                 else:
