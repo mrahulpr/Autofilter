@@ -50,18 +50,22 @@ async def give_filter(client, message):
             if PM_FILTER_MODE:
                 search = message.text
                 temp_files, temp_offset, total_results = await get_search_results(chat_id=None, query=search.lower(), offset=0, filter=True)
-                user = message.from_user.id
                 key = f"{message.id}"
                 QUERY[key] = search
                 end_time = time.time() 
                 execution_time = end_time - start_time
                 last = "{:.2f}".format(execution_time % 60)
-                msg = await message.reply_text(text=f"<b>• Title : #{search} \n• Total Files : {total_results} \n\n © @webotz </b>", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("📤 Download", callback_data=f"pmswith_{key}_{user}")]]))
-                await asyncio.sleep(600)
-                await msg.delete()
-                await message.delete()
                 if total_results == 0:
-                    return
+                    req = message.from_user.id
+                    msg = await message.reply_text(text=f"<b>Spelling Mistake Bro 🤐, Try Again with correct spelling. </b>", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Google it 😂 ", url=f"https://www.google.com/search?q={search} movie")]]))
+                    await msg.delete()
+                    await message.delete()
+                else:
+                    user = message.from_user.id
+                    msg = await message.reply_text(text=f"<b>• Title : #{search} \n• Total Files : {total_results} \n\n © @webotz </b>", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("📤 Download", callback_data=f"pmswith_{key}_{user}")]]))
+                    await asyncio.sleep(600)
+                    await msg.delete()
+                    await message.delete()
                 
 
 
@@ -238,8 +242,6 @@ async def next_page(bot, query):
 @Client.on_callback_query(filters.regex(r"^lang"))
 async def language_check(bot, query):
     _, userid, language = query.data.split("#")
-    if int(userid) not in [query.from_user.id, 0]:
-        return await query.answer(script.ALRT_TXT.format(query.from_user.first_name), show_alert=True)
     if language == "unknown":
         return await query.answer("Sᴇʟᴇᴄᴛ ᴀɴʏ ʟᴀɴɢᴜᴀɢᴇ ғʀᴏᴍ ᴛʜᴇ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴs !", show_alert=True)
     movie = temp.KEYWORD.get(query.from_user.id)
@@ -368,8 +370,6 @@ async def language_check(bot, query):
 @Client.on_callback_query(filters.regex(r"^select_lang"))
 async def select_language(bot, query):
     _, userid = query.data.split("#")
-    if int(userid) not in [query.from_user.id, 0]:
-        return await query.answer(script.ALRT_TXT.format(query.from_user.first_name), show_alert=True)
     btn = [[
         InlineKeyboardButton("Choose Your Language ⚛️", callback_data=f"lang#{userid}#unknown")
     ],[
