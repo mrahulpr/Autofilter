@@ -55,18 +55,11 @@ async def give_filter(client, message):
                 end_time = time.time() 
                 execution_time = end_time - start_time
                 last = "{:.2f}".format(execution_time % 60)
-                if total_results == 0:
-                    req = message.from_user.id
-                    msg = await message.reply_text(text=f"<b>Spelling Mistake Bro 🤐, Try Again with correct spelling. </b>", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Google it 😂 ", url=f"https://www.google.com/search?q={search}_movie")]]))
-                    await asyncio.sleep(600)
-                    await msg.delete()
-                    await message.delete()
-                else:
-                    user = message.from_user.id
-                    msg = await message.reply_text(text=f"<b>• Title : #{search} \n• Total Files : {total_results} \n\n © @webotz </b>", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("📤 Download", callback_data=f"pmswith_{key}_{user}")]]))
-                    await asyncio.sleep(600)
-                    await msg.delete()
-                    await message.delete()
+                user = message.from_user.id
+                msg = await message.reply_text(text=f"<b>• Title : #{search} \n• Total Files : {total_results} \n\n © @webotz </b>", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("📤 Download", callback_data=f"pmswith_{key}_{user}")]]))
+                await asyncio.sleep(600)
+                await msg.delete()
+                await message.delete()
                 
 
 
