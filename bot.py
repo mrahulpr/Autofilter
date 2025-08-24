@@ -157,8 +157,6 @@ if __name__ == "__main__":
         logging.info("Bot stopped by user")
     except Exception as e:
         logging.error(f"Fatal error: {e}")
-                yield message
-                current += 1
 
 
 app = Bot()
