@@ -162,4 +162,74 @@ if __name__ == "__main__":
 
 
 app = Bot()
+app.run()        chat_id: Union[int, str],
+        limit: int,
+        offset: int = 0,
+    ) -> Optional[AsyncGenerator["types.Message", None]]:
+        """
+        Iterate through a chat sequentially with improved error handling.
+        
+        This convenience method does the same as repeatedly calling :meth:`~pyrofork.Client.get_messages` 
+        in a loop, thus saving you from the hassle of setting up boilerplate code. 
+        It is useful for getting the whole chat messages with a single call.
+
+        Parameters:
+            chat_id (``int`` | ``str``):
+                Unique identifier (int) or username (str) of the target chat.
+                For your personal cloud (Saved Messages) you can simply use "me" or "self".
+                For a contact that exists in your Telegram address book you can use his phone number (str).
+
+            limit (``int``):
+                Identifier of the last message to be returned.
+
+            offset (``int``, *optional*):
+                Identifier of the first message to be returned.
+                Defaults to 0.
+
+        Returns:
+            ``Generator``: A generator yielding :obj:`~pyrofork.types.Message` objects.
+
+        Example:
+            .. code-block:: python
+
+                async for message in app.iter_messages("pyrofork", 1, 15000):
+                    print(message.text)
+        """
+        current = offset
+        
+        while True:
+            try:
+                new_diff = min(200, limit - current)
+                if new_diff <= 0:
+                    return
+
+                messages = await self.get_messages(chat_id, list(range(current, current + new_diff + 1)))
+                
+                for message in messages:
+                    if message:  # Check if message exists
+                        yield message
+
+                current += 1
+                
+                # Add small delay to prevent rate limiting
+                await asyncio.sleep(0.1)
+                
+            except Exception as e:
+                logging.error(f"Error in iter_messages: {e}")
+                break
+
+# Initialize and run bot
+if __name__ == "__main__":
+    try:
+        app = Bot()
+        app.run()
+    except KeyboardInterrupt:
+        logging.info("Bot stopped by user")
+    except Exception as e:
+        logging.error(f"Fatal error: {e}")
+                yield message
+                current += 1
+
+
+app = Bot()
 app.run()
